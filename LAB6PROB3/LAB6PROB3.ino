@@ -2,7 +2,7 @@ int piezo = 11;
 
 int buttons[8] = {2,3,4,5,6,7,8,9};
 
-int notesArr[8] = {131, 147, 165, 175, 196, 220, 247, 262};
+int notesArr[8] = {523, 587, 659, 698, 784, 880, 988, 1047};
 
 void setup() {
   // put your setup code here, to run once:
