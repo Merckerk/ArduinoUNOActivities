@@ -1,0 +1,6 @@
+{
+    "sketch": "LAB7PROB3\\LAB7PROB3.ino",
+    "board": "arduino:avr:uno",
+    "programmer": "parallel",
+    "port": "COM1"
+}
