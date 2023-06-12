@@ -17,16 +17,21 @@ char keymap[rows][columns] = {
  };
 
 //Pin locations of rows and columns on the arduino board
+//(From left to right of Keypad starting pin)
+//ROWS - Pins 2, 3, 4, 5
+//COLUMNS - Pins 6, 7, 8, 9
 byte rowPins[rows] = {2, 3, 4, 5};
 byte columnPins[columns] = {6, 7, 8, 9};
 
 //Instantiate Keypad object
 Keypad keypad1 = Keypad(makeKeymap(keymap), rowPins, columnPins, rows, columns);
 
+//Flags for enabling and disabling entry of numbers and the answer
 bool num1Flag = false;
 bool num2Flag = false;
 bool ansFlag = false;
 
+//Variables for storing the numbers, decimal numbers, hexadecimal numbers, answer, and operator
 String num1, num2;
 long deciNum1, deciNum2;
 String hexNumber1, hexNumber2;
@@ -42,21 +47,23 @@ void setup(){
 }
 
 void loop(){
-  char key = keypad1.getKey();
+  
+  char key = keypad1.getKey(); //Get key presses
 
+  //If any key is pressed
   if(key){
-    
 
+    //If the key is not equal to no_key and keys belong to the number section
     if(key != NO_KEY && (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0')){
 
-      if(num1Flag != true){
+      if(num1Flag != true){         //Enter first number
         Serial.print(key);
         num1 = num1 + key;
         deciNum1 = num1.toInt();
         hexNumber1 = deciToHex(deciNum1);
       }
 
-      else{
+      else{                       //Enter second number
         Serial.print(key);
         num2 = num2 + key;
         deciNum2 = num2.toInt();
@@ -66,12 +73,11 @@ void loop(){
       
     }
 
-    else if (num1Flag == false && key != NO_KEY && (key)){
-      
+    else if (num1Flag == false && key != NO_KEY && (key)){    //If num1 is false, and any key is pressed on the keypad
 
-      if(num1 != " " && num1Flag == false){
+      if(num1 != " " && num1Flag == false){                   //If num1 is not blank and the num1 flag is false
 
-        if(key == '*'){
+        if(key == '*'){                                       //Print operations menu when '*' is pressed on the keypad
           Serial.println("\nOperations:");
           Serial.println("--------------");
           Serial.println("Button A - Addition");
@@ -81,7 +87,7 @@ void loop(){
           Serial.println("Choose your operation: ");
         }
         
-
+          //Addition - A button on keypad
         if(key == 'A'){
           Serial.print(" Addition");
           Serial.print("\n");
@@ -91,6 +97,7 @@ void loop(){
           num2Flag = true;
         }
 
+          //Subtraction - B button on keypad
         else if(key == 'B'){
           Serial.print(" Subtraction");
           Serial.print("\n");
@@ -100,6 +107,7 @@ void loop(){
           num2Flag = true;
         }
 
+          //Multiplication - C button on keypad
         else if(key == 'C'){
           Serial.print(" Multiplication");
           Serial.print("\n");
@@ -109,6 +117,7 @@ void loop(){
           num2Flag = true;
         }
 
+          //Division - D button on keypad
         else if(key == 'D'){
           Serial.print(" Division");
           Serial.print("\n");
@@ -121,6 +130,8 @@ void loop(){
   
     }
     
+//Equals key, requires answer flag to be true and '#' on the keypad to be pressed
+//Operations and display of equation
     else if(ansFlag == true && key != NO_KEY && key == '#'){
       if(op == '+'){
         answer = deciNum1 + deciNum2;
@@ -183,6 +194,8 @@ void loop(){
   }
 }
 
+
+                                                    //Decimal to Hexadecimal convert function
 String deciToHex(long n){
   String hexNum;
   long remainder;
@@ -196,7 +209,7 @@ String deciToHex(long n){
     }
 
     else{
-      switch(remainder){
+      switch(remainder){          //Depending on two digit number's remainder when divided by 16,  letters A - F are substituted
         case 10:
           hexNum = "A" + hexNum;
           break;
@@ -206,7 +219,7 @@ String deciToHex(long n){
           break;
         
         case 12:
-          hexNum = 'C' + hexNum;
+          hexNum = "C" + hexNum;
           break;
         
         case 13: 
