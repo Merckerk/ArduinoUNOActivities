@@ -190,7 +190,7 @@ void loop(){
     }
 
     else if(key != NO_KEY && key == '*'){
-      Serial.println("\nAll values cleared\n\n");
+      Serial.println("\n\nAll values cleared\n\n");
       Serial.println("Enter the first number: ");
       num1 = ' ';
       num2 = ' ';
