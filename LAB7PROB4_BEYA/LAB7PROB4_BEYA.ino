@@ -1,6 +1,5 @@
 #include <Keypad.h>
 
-//tite
 const int ROW_NUM = 4; // Four rows
 const int COLUMN_NUM = 4; // Four columns
 char keys[ROW_NUM][COLUMN_NUM] = {
