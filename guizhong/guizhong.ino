@@ -86,6 +86,7 @@ void setup()
 {
   pinMode(piezo, OUTPUT);
   setTimings(72);
+  Serial.begin(9600);
 }
 
 void loop()
