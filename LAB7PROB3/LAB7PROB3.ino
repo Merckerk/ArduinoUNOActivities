@@ -1,7 +1,7 @@
 // C++ code
 //
 
-//Keypad header for instantiating and calling a Keypad object
+//Keypad header for instantiating and calling a Keypad object 
 #include <Keypad.h>
 
 //Rows and Columns
