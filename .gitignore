@@ -1,1 +1,5 @@
 .vscode/c_cpp_properties.json
+.vscode/arduino.json
+diagram.json
+wokwi.toml
+.vscode/arduino.json
