@@ -10,10 +10,10 @@
 
 //Libraries needed
 #include <Keypad.h>
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-int rs = 0, en = 1, d4 = 2, d5 = 3, d6 = 4, d7 = 5;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 const byte ROWS = 4;
 const byte COLS = 4;
@@ -25,8 +25,8 @@ char keyMap[ROWS][COLS] = {
   {'*', '0', '#', 'D'}
 };
 
-byte rowPins[ROWS] = {6, 7, 8, 9};
-byte colPins[COLS] = {10, 11, 12, 13};
+byte rowPins[ROWS] = {2, 3, 4, 5};
+byte colPins[COLS] = {6, 7, 8, 9};
 
 Keypad keypad1 = Keypad(makeKeymap(keyMap), rowPins, colPins, ROWS, COLS);
 
@@ -40,7 +40,10 @@ char operation;
 
 void setup()
 {
-  lcd.begin(16, 2);
+  lcd.init();
+  lcd.clear();
+  lcd.backlight();
+  
   lcd.setCursor(0,0);
   lcd.print("Group 7 Presents");
   delay(2000);
@@ -188,5 +191,12 @@ void loop()
     num2 = "";
     answer = 0;
     operation = ' ';
+    
+    lcd.setCursor(3, 0);
+    lcd.print("All values");
+    lcd.setCursor(4, 1);
+    lcd.print("cleared.");
+    delay(2000);
+    lcd.clear();
   }
 }
