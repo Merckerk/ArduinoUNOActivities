@@ -1,6 +1,7 @@
 //Hot or cold but for numbers
 //Enter number from 1-100
 //then press # to submit your number that you guessed.
+//if round reaches 5, game over
 
 #include <Keypad.h>
 #include <Wire.h>
