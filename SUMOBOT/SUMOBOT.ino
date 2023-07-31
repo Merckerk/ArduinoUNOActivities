@@ -1,8 +1,5 @@
 /*
 
- by ahmed Azouz
-  https://www.instructables.com/id/How-to-Make-Ardu...
-
   Download the lib from here first
   https://github.com/ErickSimoes/Ultrasonic/blob/ma...
 
@@ -17,7 +14,7 @@ const int IN3=9;
 const int IN4=10;
 #define IR_sensor_front A0  // front sensor
 #define IR_sensor_back A1 // rear senson
-int distance ;
+int distance;
 
 void  setup() 
 {
@@ -37,11 +34,11 @@ void  loop()
     distance = ultrasonic.read();
     IR_front = analogRead(IR_sensor_front);
     IR_back = analogRead(IR_sensor_back);
-    if ( IR_front > 650 || IR_back  > 650 ) { break;}
+    if ( IR_front < 650 || IR_back  < 650 ) { break;}
     delay(10); }
   
   
- if (IR_front < 650 )  // <  650 means white line
+ if (IR_front > 650 )  // <  650 means white line
    {
    Stop();
    delay (50);
@@ -49,7 +46,7 @@ void  loop()
    delay (500);
    } 
    
- if (IR_back < 650 )  //
+ if (IR_back > 650 )  //
    {
    Stop();
    delay (50);
@@ -57,14 +54,14 @@ void  loop()
    delay (500);
    }
    
-   /* -----------  debugging ----------------
-  Serial.print(ultrasonic.Ranging(CM));
+
+  Serial.print(ultrasonic.read(CM));
   Serial.println("cm");
   Serial.println("IR front :");
   Serial.println(IR_front); 
   Serial.println("IR  back :");
   Serial.println(IR_back);  
-*/ 
+
 
 } //--------------------------------------------
 void  FORWARD (int Speed){
